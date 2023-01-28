@@ -1,0 +1,43 @@
+<div class="container">
+  <h1><%= @list.name %></h1>
+  <div>
+    <% @list.bookmarks.each do |bookmark| %>
+      <div class="card-trip">
+        <%= image_tag bookmark.movie.poster_url, alt: "Le Wagon", width: 200 %>
+        <div class="card-trip-infos">
+          <div>
+            <h2><%= bookmark.movie.title %> &bull; <%= bookmark.movie.rating %> <i class="fa-regular fa-star"></i></h2>
+            <p><%= bookmark.comment %></p>
+          </div>
+          <%= link_to bookmark_path(bookmark), class: "card-trip-pricing",
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  do %>
+              <i class="fa-regular fa-trash-can"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn-ghost" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Add Bookmark
+  </button>
+
+  <%= render 'bookmarks/modal' %>
+
+  <hr>
+
+  <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between">
+      <%= simple_form_for [@list, @review] do |f| %>
+        <%= f.input :comment %>
+        <%= f.input :rating %>
+        <%= f.submit 'Add', class: "btn-ghost" %>
+      <% end %>
+    </div>
+    <div class="d-flex justify-content-between">
+      <% @list.reviews.each do |review| %>
+        <%= review.comment %>
+      <% end %>
+    </div>
+  </div>
+</div>
