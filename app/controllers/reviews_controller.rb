@@ -7,6 +7,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to list_path(@list)
     else
+      @image = @list.select_img
       render 'lists/show', status: :unprocessable_entity
     end
   end

@@ -1,5 +1,6 @@
-<div class="d-flex mb-5">
+<div class="d-flex mb-5 mt-4">
   <div class="d-flex flex-column w-50 me-4">
+    <h3>Tell us your opinion!</h3>
     <%= simple_form_for [@list, @review] do |f| %>
       <%= f.input :comment %>
       <%= f.input :rating, collection: (1..5).to_a,
@@ -10,7 +11,7 @@
   <div class="d-flex flex-column w-50 ps-4" style="border-left: 1px solid grey">
     <div class="d-flex flex-wrap">
       <div class="w-100">
-        <h2>Reviews</h2>
+        <h3 style="text-align: center">Reviews</h3>
       </div>
       <ul class="list-group w-100">
         <% @list.reviews.each do |review| %>
