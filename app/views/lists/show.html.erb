@@ -55,7 +55,7 @@
             <li class="list-group-item mb-2 d-flex flex-wrap card-review">
               <div class="w-100" data-controller="star-rating">
                 <% review.rating.times do %>
-                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star" style="color: #F49D1A"></i>
                 <% end %>
                 <small class="text-muted">posted <%= time_ago_in_words(review.created_at) %> ago</small>
               </div>
