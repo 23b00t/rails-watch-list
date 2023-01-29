@@ -7,8 +7,8 @@
       </div>
       <div class="modal-body">
         <%= simple_form_for [@list, @bookmark] do |f| %>
+          <%= f.association :movie, collection: @movies %>
           <%= f.input :comment %>
-          <%= f.association :movie %>
           <%= f.submit 'Add', class: "btn-ghost" %>
         <% end %>
       </div>

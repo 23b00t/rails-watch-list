@@ -1,0 +1,32 @@
+<div class="d-flex mb-5">
+  <div class="d-flex flex-column w-50 me-4">
+    <%= simple_form_for [@list, @review] do |f| %>
+      <%= f.input :comment %>
+      <%= f.input :rating, collection: (1..5).to_a,
+      label: "Rate your experience", input_html: {data: {controller: "star-rating"}} %>
+      <%= f.submit 'Add', class: "btn-ghost" %>
+    <% end %>
+  </div>
+  <div class="d-flex flex-column w-50 ps-4" style="border-left: 1px solid grey">
+    <div class="d-flex flex-wrap">
+      <div class="w-100">
+        <h2>Reviews</h2>
+      </div>
+      <ul class="list-group w-100">
+        <% @list.reviews.each do |review| %>
+          <li class="list-group-item mb-2 d-flex flex-wrap card-review">
+            <div class="w-100" data-controller="star-rating">
+              <% review.rating.times do %>
+                <i class="fa-solid fa-star" style="color: #F49D1A"></i>
+              <% end %>
+              <small class="text-muted">posted <%= time_ago_in_words(review.created_at) %> ago</small>
+            </div>
+            <div class="w-100">
+              <%= review.comment %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,15 @@
 class ListsController < ApplicationController
+  before_action :set_list, only: %i[show destroy]
+
   def index
     @lists = List.all
   end
 
   def show
-    @list = List.find(params[:id])
     @bookmark = Bookmark.new
     @review = Review.new
+    @image = @list.select_img
+    @movies = Movie.order(:title)
   end
 
   def new
@@ -19,7 +22,6 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    @list = List.find(params[:id])
     @list.destroy
     redirect_to lists_path, status: :see_other
   end
@@ -28,5 +30,9 @@ class ListsController < ApplicationController
 
   def list_params
     params.require(:list).permit(:name)
+  end
+
+  def set_list
+    @list = List.find(params[:id])
   end
 end
