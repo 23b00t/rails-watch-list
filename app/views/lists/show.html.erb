@@ -1,15 +1,24 @@
 <div class="container">
-  <h1><%= @list.name %></h1>
-  <div>
+  <% if @list.bookmarks.first.nil? %>
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+       url(<%= image_url "cinema.jpg", alt: "Movie poster" %>)">
+  <% else %>
+    <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+         url(<%= image_url @list.bookmarks.first.movie.poster_url, alt: "Movie poster" %>)">
+  <% end %>
+    <%= @list.name %>
+    </div>
+
+  <div class="d-flex flex-wrap">
     <% @list.bookmarks.each do |bookmark| %>
-      <div class="card-trip">
-        <%= image_tag bookmark.movie.poster_url, alt: "Le Wagon", width: 200 %>
-        <div class="card-trip-infos">
+      <div class="card-movie">
+        <%= image_tag bookmark.movie.poster_url, alt: "Movie poster" %>
+        <div class="card-movie-infos">
           <div>
             <h2><%= bookmark.movie.title %> &bull; <%= bookmark.movie.rating %> <i class="fa-regular fa-star"></i></h2>
             <p><%= bookmark.comment %></p>
           </div>
-          <%= link_to bookmark_path(bookmark), class: "card-trip-pricing",
+          <%= link_to bookmark_path(bookmark), class: "card-movie-pricing",
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  do %>
               <i class="fa-regular fa-trash-can"></i>
           <% end %>
@@ -26,18 +35,35 @@
 
   <hr>
 
-  <div class="d-flex justify-content-between">
-    <div class="d-flex justify-content-between">
+  <div class="d-flex mb-5">
+    <div class="d-flex flex-column w-50 me-4">
       <%= simple_form_for [@list, @review] do |f| %>
         <%= f.input :comment %>
-        <%= f.input :rating %>
+        <%= f.input :rating, collection: (1..5).to_a,
+        label: "Rate your experience", input_html: {data: {controller: "star-rating"}} %>
         <%= f.submit 'Add', class: "btn-ghost" %>
       <% end %>
     </div>
-    <div class="d-flex justify-content-between">
-      <% @list.reviews.each do |review| %>
-        <%= review.comment %>
-      <% end %>
+
+    <div class="d-flex flex-column w-50 ps-4" style="border-left: 1px solid grey">
+      <div class="d-flex flex-wrap">
+        <div class="w-100">
+          <h2>Reviews</h2>
+        </div>
+        <ul class="list-group w-100">
+          <% @list.reviews.each do |review| %>
+            <li class="list-group-item mb-2 d-flex flex-wrap card-review">
+              <div class="w-100" data-controller="star-rating">
+                <%= review.rating %>
+              </div>
+              <div class="w-100">
+                <%= review.comment %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
+
 </div>

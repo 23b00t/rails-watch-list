@@ -1,8 +1,26 @@
 <div class="container">
-  <h1>Your lists:</h1>
-  <ul class="list-group">
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+       url(<%= image_url "cinema.jpg", alt: "Movie poster" %>)">
+    Save any kind of movies
+  </div>
+  <div class="d-flex flex-wrap">
     <% @lists.each do |list| %>
-      <li class="list-group-item mb-2"><%= link_to list.name, list_path(list) %></li>
+      <div class="card-movie">
+        <% if list.bookmarks.first.nil? %>
+          <%= image_tag "cinema.jpg", alt: "Movie poster" %>
+        <% else %>
+          <%= image_tag list.bookmarks.first.movie.poster_url, alt: "Movie poster", style: "object-fit: cover" %>
+        <% end %>
+        <div class="card-movie-infos">
+          <div>
+            <%= link_to list.name, list_path(list) %>
+          </div>
+          <%= link_to list_path(list), class: "card-movie-pricing",
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  do %>
+              <i class="fa-regular fa-trash-can"></i>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-  </ul>
+  </div>
 </div>
