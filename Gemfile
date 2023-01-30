@@ -70,3 +70,6 @@ end
 
 gem 'rspec-rails', group: [ :test ]
 gem 'rails-controller-testing', group: [ :test ]
+
+# handel ENV
+gem "dotenv-rails", groups: [:development, :test]

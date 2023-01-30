@@ -23,3 +23,13 @@ parsed_data = JSON.parse(response)
 parsed_data['results'].each do |result|
   Movie.create(title: result['original_title'], overview: result['overview'], poster_url: "#{img_path}#{result["poster_path"]}", rating: result['vote_average'])
 end
+
+api_key = ENV['API_KEY']
+url = URI("https://imdb-api.com/en/API/Top250Movies/#{api_key}")
+
+response = Net::HTTP.get(url)
+parsed_data = JSON.parse(response)
+
+parsed_data['items'].each do |result|
+  Movie.create(title: result['title'], overview: result['crew'], poster_url: result['image'], rating: result['imDbRating'])
+end
