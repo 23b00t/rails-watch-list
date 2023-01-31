@@ -8,7 +8,6 @@ class ListsController < ApplicationController
   def show
     @bookmark = Bookmark.new
     @review = Review.new
-    @image = @list.select_img
     @movies = Movie.order(:title)
   end
 
@@ -29,7 +28,7 @@ class ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name, :photo)
   end
 
   def set_list

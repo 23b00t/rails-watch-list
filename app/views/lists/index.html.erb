@@ -1,15 +1,15 @@
 <div class="container">
   <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-       url(<%= image_url "cinema.jpg", alt: "Movie poster" %>)">
+       url(<%= image_url 'cinema.jpg', alt: "Movie poster" %>)">
     Save any kind of movies
   </div>
   <div class="d-flex flex-wrap">
     <% @lists.each do |list| %>
       <div class="card-movie">
-        <% if list.bookmarks.first.nil? %>
-          <%= image_tag "cinema.jpg", alt: "Movie poster" %>
+        <% if list.photo.attached? %>
+          <%= cl_image_tag list.photo.key, crop: :fill %>
         <% else %>
-          <%= image_tag list.bookmarks.first.movie.poster_url, alt: "Movie poster", style: "object-fit: cover" %>
+          <%= image_tag "cinema.jpg", alt: "Movie poster" %>
         <% end %>
         <div class="card-movie-infos">
           <div>
