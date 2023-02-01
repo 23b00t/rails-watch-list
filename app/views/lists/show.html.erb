@@ -11,14 +11,14 @@
 
   <div class="d-flex flex-wrap">
     <% @list.bookmarks.each do |bookmark| %>
-      <div class="card-movie col-sm-12">
+      <div class="card-movie">
         <%= image_tag bookmark.movie.poster_url, alt: "Movie poster" %>
         <div class="card-movie-infos">
           <div>
             <h2><%= bookmark.movie.title %> &bull; <%= bookmark.movie.rating %> <i class="fa-regular fa-star"></i></h2>
             <p><%= bookmark.comment %></p>
           </div>
-          <%= link_to bookmark_path(bookmark), class: "card-movie-pricing",
+          <%= link_to bookmark_path(bookmark),
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  do %>
               <i class="fa-regular fa-trash-can"></i>
           <% end %>

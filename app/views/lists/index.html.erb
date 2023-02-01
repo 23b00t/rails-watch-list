@@ -14,8 +14,26 @@
         <div class="card-movie-infos">
           <div>
             <%= link_to list.name, list_path(list) %>
+            <% if list.reviews.first %>
+              <figure>
+                <blockquote class="blockquote">
+                  <p><cite><%= list.reviews.first.comment %></cite></p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                  A user
+                </figcaption>
+              </figure>
+            <% end %>
+            <% unless list.ave_rating.nil? %>
+              <% list.ave_rating.floor.times do  %>
+                <i class="fa-solid fa-star" style="color: #F49D1A"></i>
+              <% end %>
+              <% unless list.ave_rating.floor == list.ave_rating %>
+                <i class="fa-solid fa-star-half-stroke" style="color: #F49D1A"></i>
+              <% end %>
+            <% end %>
           </div>
-          <%= link_to list_path(list), class: "card-movie-pricing",
+          <%= link_to list_path(list),
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  do %>
               <i class="fa-regular fa-trash-can"></i>
           <% end %>
