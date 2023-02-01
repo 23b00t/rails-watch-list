@@ -3,7 +3,7 @@
        url(<%= image_url 'cinema.jpg', alt: "Movie poster" %>)">
     Save any kind of movies
   </div>
-  <div class="d-flex flex-wrap">
+  <div class="d-flex flex-wrap col-sm-12">
     <% @lists.each do |list| %>
       <div class="card-movie">
         <% if list.photo.attached? %>

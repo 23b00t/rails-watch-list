@@ -12,3 +12,16 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+#navbarSupportedContent {
+  align-items: flex-end;
+  justify-items: end;
+}
+
+.navbar-nav {
+  justify-content: flex-end;
+}
+
+.navbar-toggler {
+  margin-bottom: 16px;
+}
