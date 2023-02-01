@@ -15,14 +15,12 @@
           <div>
             <%= link_to list.name, list_path(list) %>
             <% if list.reviews.first %>
-              <figure>
-                <blockquote class="blockquote">
-                  <p><cite><%= list.reviews.first.comment %></cite></p>
-                </blockquote>
-                <figcaption class="blockquote-footer">
-                  A user
-                </figcaption>
-              </figure>
+              <blockquote class="blockquote">
+                <p><cite><%= list.reviews.first.comment %></cite></p>
+              </blockquote>
+              <figcaption class="blockquote-footer">
+                A user
+              </figcaption>
             <% end %>
             <% unless list.ave_rating.nil? %>
               <% list.ave_rating.floor.times do  %>
