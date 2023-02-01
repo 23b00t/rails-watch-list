@@ -16,7 +16,7 @@
             <%= link_to list.name, list_path(list) %>
             <% if list.reviews.first %>
               <blockquote class="blockquote">
-                <p><cite><%= list.reviews.first.comment %></cite></p>
+                <p><cite><%= list.reviews.sort_by(&:rating).last.comment %></cite></p>
               </blockquote>
               <figcaption class="blockquote-footer">
                 A user
@@ -24,10 +24,10 @@
             <% end %>
             <% unless list.ave_rating.nil? %>
               <% list.ave_rating.floor.times do  %>
-                <i class="fa-solid fa-star" style="color: #F49D1A"></i>
+                <i class="fa-solid fa-star" style="color: #F49D1A; font-size: 14px"></i>
               <% end %>
               <% unless list.ave_rating.floor == list.ave_rating %>
-                <i class="fa-solid fa-star-half-stroke" style="color: #F49D1A"></i>
+                <i class="fa-solid fa-star-half-stroke" style="color: #F49D1A; font-size: 14px"></i>
               <% end %>
             <% end %>
           </div>
