@@ -5,7 +5,12 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.new(bookmark_params)
     @bookmark.list_id = @list.id
 
-    redirect_to list_path(@bookmark.list) if @bookmark.save
+    if @bookmark.save
+      redirect_to list_path(@bookmark.list)
+    else
+      @show_modal = true
+      render 'lists/show', status: :unprocessable_entity
+    end
   end
 
   def destroy

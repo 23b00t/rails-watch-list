@@ -28,9 +28,17 @@
   </div>
 
   <!-- Button trigger modal -->
-  <button type="button" class="btn-ghost" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Add Bookmark
-  </button>
+  <div data-controller="render-modal">
+    <button type="button" class="btn-ghost" id="modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      Add Bookmark
+    </button>
+  </div>
+
+  <% if @show_modal %>
+    <script>
+      document.querySelector('#modal-btn').click();
+    </script>
+  <% end %>
 
   <%= render 'bookmarks/modal' %>
 
